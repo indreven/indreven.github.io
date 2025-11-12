@@ -1,0 +1,138 @@
+body {
+  font-family: 'Arial', 'Times-New-Roman', Verdana, Tahoma, sans-serif; 
+  color:rgb(131, 23, 232);
+  line-height:  1.9;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 { font-size: 2.5rem; color: #0b68e9; }
+h2 { font-size: 2rem; color: #f4a023; }
+h3 { font-size: 1.75rem; color: #f238c3; }
+h4 { font-size: 1.5rem; color: #e70d0d; }
+h5 { font-size: 1.25rem; color: #08e516; }
+h6 { font-size: 1rem; color: #e491b5; }
+
+p {
+  color: #e120b4;
+  font-size: 17px;
+  font-style: italic;
+}
+
+li {
+  background-color: hotpink;
+  color:white;
+  padding: 1rem;
+  border: none;
+  font-size: larger;
+
+}
+li:hover {
+  background-color: rgb(153, 80, 153);
+  cursor: pointer;
+}
+li:active {
+color: lightblue;
+}
+a {
+  color: yellow;
+}
+a:hover {
+  color: orange;
+  text-decoration: underline;
+
+}
+section p {
+  padding: 5px;
+  margin: 20px;
+  border-radius: 2rem;
+  box-shadow: turquoise;
+}
+.navmenu {
+  background: linear-gradient(90deg,red,blue);
+  border-radius: 20px;
+  padding: 50px;
+}
+.navmenu a {
+  color: white !important;
+  margin: 0 15px;
+  text-transform: uppercase;
+}
+
+.navmenu a:hover {
+  color: #fdd835 !important;
+}
+#scroll-top {
+  background-color: #73f411;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#scroll-top:hover {
+  background-color: #0c4d12;
+  transform: scale(1.1);
+}
+.duom-list {
+  list-style:inside; /* remove default bullets */
+  padding-left: 0;
+}
+.duom-list li::before {
+  content: "⚙️"; 
+  position: left;
+  font-size: 1.1rem;
+}
+.veikla-list {
+  background-color: lightpink !important;
+  list-style:georgian;
+  color: black;
+  font-size: smaller;
+}
+.veikla-list li::before {
+  content: "<3 "; 
+  position:relative;
+  font-size: 0.5rem;
+}
+.veikla-list ul {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.veikla-list ul li::before {
+  content: "•";
+  color: #6bcf1f;
+  margin-right: 10px;}
+
+.services-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  background-color: lightcoral;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 12px; 
+   vertical-align: middle; 
+  
+  
+}
+.services-table tbody tr:hover {
+  background-color: #e0aea0;
+  transition: 0.2s;
+}
