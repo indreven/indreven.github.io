@@ -54,18 +54,18 @@ section p {
   box-shadow: turquoise;
 }
 .navmenu {
-  background: linear-gradient(90deg,red,blue);
-  border-radius: 20px;
-  padding: 50px;
+  background: linear-gradient(90deg,rgb(235, 130, 219),purple);
+  border-radius: 10px;
+  padding: 10px;
 }
 .navmenu a {
-  color: white !important;
+  color: white;
   margin: 0 15px;
   text-transform: uppercase;
 }
 
 .navmenu a:hover {
-  color: #fdd835 !important;
+  color: #fdd835 
 }
 #scroll-top {
   background-color: #73f411;
@@ -89,7 +89,7 @@ section p {
   transform: scale(1.1);
 }
 .duom-list {
-  list-style:inside; /* remove default bullets */
+  list-style:inside; 
   padding-left: 0;
 }
 .duom-list li::before {
@@ -134,5 +134,149 @@ section p {
 }
 .services-table tbody tr:hover {
   background-color: #e0aea0;
-  transition: 0.2s;
+
+}
+
+.fade-in-section{
+  opacity: 10%;
+  animation: fadeIn 10s ease forwards;
+
+}
+
+@keyframes fadeIn {
+  from { opacity: 0;  }
+  to   { opacity: 1;  }
+}
+.social-links {
+  animation: floatIcons 3s ease-in-out infinite;
+}
+
+@keyframes floatIcons {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+   100% {
+    opacity: 1;
+    transform: translateY(0);
+   }
+}
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  overflow: hidden;
+  background: var(--background-color);
+  transition: all 3.5s ease-out;
+}
+
+#preloader:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #ffffff;
+  border-color: var(--accent-color) transparent var(--accent-color) transparent;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: animate-preloader 1.5s linear infinite;
+}
+
+@keyframes animate-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce ){
+  .fade-in-section {
+    animation: none;
+    opacity: 1;
+  }
+  .social-links {
+    animation: none;
+  }
+  #preloader::after {
+    animation: none;
+    border: 6x solid #aaa;
+    border-top-color: #aaa;
+  }
+}
+#services {
+  position: relative;
+  background: linear-gradient(120deg,rgb(251, 118, 167),rgb(106, 190, 217));
+  background-size: 300% 300%;
+  animation: gradiantMove 10s ease infinite;
+}
+@keyframes gradiantMove {
+  0% {background-position: 0%;}
+  50% {background-position: 50%;}
+  100% { background-position: 100%;}
+  
+}
+#about {
+  position: relative;
+}
+
+
+.shape {
+  position: absolute;
+  opacity: 0.3;
+
+}
+
+/* Apskritimas */
+.floating-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #ff7eb3;
+  top: 50%;
+  left: 60px;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Trikampis */
+.floating-triangle {
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent;
+  border-right: 70px solid transparent;
+  border-bottom: 120px solid #6a11cb;
+  top: 70%;
+  right: 0px;
+  animation: float 7s ease-in-out infinite, rotate 12s linear infinite;
+}
+
+/* Kvadratas */
+.floating-square {
+  width: 80px;
+  height: 80px;
+  background: #2575fc;
+  top: 20%;
+  right: 10%;
+  animation: scaleUp 5s ease-in-out infinite alternate;
+}
+
+/* Animacijos */
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-25px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(1); }
+  to   { transform: scale(3.5); }
 }
