@@ -280,3 +280,23 @@ section p {
   from { transform: scale(1); }
   to   { transform: scale(3.5); }
 }
+
+.form-container {
+  margin-left: 50px;
+}
+.submit-popup {
+  display: none;
+  background: #28a745;
+  color: white;
+  padding: 12px 18px;
+  
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+.submit-popup.show {
+  display: block;
+  opacity: 1;
+}
