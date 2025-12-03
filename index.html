@@ -746,81 +746,57 @@
     <section id="contact" class="contact section">
 
       <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade" data-aos-delay="100">
 
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
-              </div>
-            </div><!-- End Info Item -->
-
-          </div>
+        <div class="row gy-4"></div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
+            <div id="form-output" class="mt-4 p-3 border"></div>
+            <div id="form-average" class="mt-2 fw-bold"></div> 
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
+            <div id="submit-popup" class="submit-popup">
+                    Duomenys pateikti sėkmingai!
+            </div>
+            <form id="contact-info"></form>
           </div><!-- End Contact Form -->
 
         </div>
 
       </div>
 
-    </section><!-- /Contact Section -->
+    </section>
+    <!-- Kodas pirmais neveike, todel nes buvo ir section id 'contact' ir form id, todel pakeiciau form id i 'contact-info', tada tai pakeiciau custom.js faile ir pradejo veikt -->
 
   </main>
+  <section id="memory-game" class="section">
+    <div class="container">
+      <h2>Mano memory zaidimas</h2>
+
+      <div class="difficulty-select">
+        <label>Sunkumas: </label>
+        <select id="gameDifficulty">
+          <option value="easy">Lengvas (4x3)</option>
+          <option value="hard">Sunkus (5x4)</option>
+        </select>
+      </div>
+    <div class="game-controls">
+      <button id="startGame">Start</button>
+      <button id="resetGame">Reset</button>
+    </div>
+
+    <div class="stats">
+      <p>Ejimai: <span id="moves">0</span></p>
+      <p>Rastos poros: <span id="matches">0</span></p>
+      <p>Geriausias rezultatas: <span id="bestScore">–</span></p>
+      <p>Laikas: <span id="timer">0.0s</span></p>
+    </div>
+
+    <div id="gameBoard" class="board"></div>
+
+    <div id="winMessage" class="win-message"></div>
+    </div>
+  </section>
 
   <footer id="footer" class="footer position-relative light-background">
     <div class="container">
@@ -868,6 +844,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
 

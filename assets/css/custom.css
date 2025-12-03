@@ -300,3 +300,47 @@ section p {
   display: block;
   opacity: 1;
 }
+#memory-game {
+  margin-top: 40px;
+  padding: 20px;
+  margin-left: 10rem;
+}
+
+.board {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: 80px;
+  height: 80px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s;
+}
+
+.card.flipped {
+  background: #ffd6f6;
+  transform: rotateY(180deg);
+}
+
+.card.matched {
+  background: #c8f7c5;
+  pointer-events: none;
+}
+
+.win-message {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 900;
+  color: purple;
+  text-align: center;
+}

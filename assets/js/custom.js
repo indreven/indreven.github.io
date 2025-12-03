@@ -237,3 +237,218 @@ form.addEventListener("submit", function (e) {
   setTimeout(() => popup.classList.remove("show"), 3000);
 });
 });
+
+// =============================
+// MEMORY GAME LOGIKA 
+// =============================
+
+// ---- Elementai iš HTML ----
+const board = document.getElementById("gameBoard");
+const startBtn = document.getElementById("startGame");
+const resetBtn = document.getElementById("resetGame");
+const difficultySelect = document.getElementById("gameDifficulty");
+const winMessage = document.getElementById("winMessage");
+
+const movesText = document.getElementById("moves");
+const matchesText = document.getElementById("matches");
+const bestScoreText = document.getElementById("bestScore");
+const timerText = document.getElementById("timer");
+
+// ---- Žaidimo simboliai ----
+const icons = ["🧊", "🎅", "🎄", "🌨️", "⛄", "🥶", "❄️", "🎁","⭐","🍷"];
+
+// ---- Žaidimo kintamieji ----
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let moves = 0;
+let matches = 0;
+
+// ---- Timer ----
+let timerInterval = null;
+let time = 0;
+
+// ---- LocalStorage ----
+let bestScoreEasy = localStorage.getItem("memory_best_easy") || null;
+let bestScoreHard = localStorage.getItem("memory_best_hard") || null;
+
+
+// =============================
+// TIMER FUNKCIJOS
+// =============================
+function startTimer() {
+  time = 0;
+  timerText.textContent = "0.0s";
+
+  timerInterval = setInterval(() => {
+    time += 0.1;
+    timerText.textContent = time.toFixed(1) + "s";
+  }, 100);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+
+// =============================
+// LENTOS GENERAVIMAS
+// =============================
+function generateBoard() {
+  board.innerHTML = "";
+  winMessage.textContent = "";
+
+  // tinklo dydis
+  const size = difficultySelect.value === "easy" 
+    ? { rows: 3, cols: 4 } 
+    : { rows: 5, cols: 4 };
+
+  board.style.gridTemplateColumns = `repeat(${size.cols}, 80px)`;
+
+  // kiek ikonų reikia?
+  const needed = (size.rows * size.cols) / 2;
+  const selected = icons.slice(0, needed);
+
+  // poros
+  const pairSet = [...selected, ...selected].sort(() => Math.random() - 0.5);
+
+  // kuriame korteles
+  pairSet.forEach(icon => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.icon = icon;
+
+    card.addEventListener("click", flipCard);
+    board.appendChild(card);
+  });
+
+  resetStats();
+  updateBestScoreDisplay();
+}
+
+
+// =============================
+// KORTELIŲ ATVERTIMAS
+// =============================
+function flipCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
+
+  this.classList.add("flipped");
+  this.innerHTML = this.dataset.icon;
+
+  if (!firstCard) {
+    firstCard = this;
+    return;
+  }
+
+  secondCard = this;
+  checkMatch();
+}
+
+
+// =============================
+// PATIKRINTI PORĄ
+// =============================
+function checkMatch() {
+  moves++;
+  movesText.textContent = moves;
+
+  if (firstCard.dataset.icon === secondCard.dataset.icon) {
+    // sutapo
+    firstCard.classList.add("matched");
+    secondCard.classList.add("matched");
+
+    matches++;
+    matchesText.textContent = matches;
+
+    resetTurn();
+    checkWin();
+  } else {
+    // nesutapo
+    lockBoard = true;
+    setTimeout(() => {
+      firstCard.classList.remove("flipped");
+      secondCard.classList.remove("flipped");
+
+      firstCard.innerHTML = "";
+      secondCard.innerHTML = "";
+
+      resetTurn();
+    }, 900);
+  }
+}
+
+
+// =============================
+function resetTurn() {
+  firstCard = null;
+  secondCard = null;
+  lockBoard = false;
+}
+
+// =============================
+function resetStats() {
+  moves = 0;
+  matches = 0;
+  movesText.textContent = "0";
+  matchesText.textContent = "0";
+}
+
+
+// =============================
+// GERIAUSIO REZULTATO ATVAIZDAVIMAS
+// =============================
+function updateBestScoreDisplay() {
+  if (difficultySelect.value === "easy") {
+    bestScoreText.textContent = bestScoreEasy ?? "–";
+  } else {
+    bestScoreText.textContent = bestScoreHard ?? "–";
+  }
+}
+
+
+// =============================
+// ŽAIDIMO PABAIGA
+// =============================
+function checkWin() {
+  const totalPairs = document.querySelectorAll(".card").length / 2;
+
+  if (matches === totalPairs) {
+    winMessage.textContent = "🎉 Laimėjote!";
+    stopTimer();
+
+    const difficulty = difficultySelect.value;
+
+    if (difficulty === "easy") {
+      if (!bestScoreEasy || moves < bestScoreEasy) {
+        bestScoreEasy = moves;
+        localStorage.setItem("memory_best_easy", moves);
+      }
+    } else {
+      if (!bestScoreHard || moves < bestScoreHard) {
+        bestScoreHard = moves;
+        localStorage.setItem("memory_best_hard", moves);
+      }
+    }
+
+    updateBestScoreDisplay();
+  }
+}
+
+
+// =============================
+// MYGTUKAI
+// =============================
+startBtn.addEventListener("click", () => {
+  generateBoard();
+  stopTimer();
+  startTimer();
+});
+
+resetBtn.addEventListener("click", () => {
+  generateBoard();
+  stopTimer();
+  startTimer();
+});
